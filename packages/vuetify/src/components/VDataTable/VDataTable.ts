@@ -91,6 +91,10 @@ export default mixins(
     checkboxColor: String,
     showExpand: Boolean,
     showGroupBy: Boolean,
+    hideGroups: {
+      type: Boolean,
+      default: false,
+    },
     // TODO: Fix
     // virtualRows: Boolean,
     height: [Number, String],
@@ -313,7 +317,7 @@ export default mixins(
     },
     genGroupedRows (groupedItems: ItemGroup<any>[], props: DataScopeProps) {
       return groupedItems.map(group => {
-        if (!this.openCache.hasOwnProperty(group.name)) this.$set(this.openCache, group.name, true)
+        if (!this.openCache.hasOwnProperty(group.name)) this.$set(this.openCache, group.name, this.hideGroups)
 
         if (this.$scopedSlots.group) {
           return this.$scopedSlots.group({
